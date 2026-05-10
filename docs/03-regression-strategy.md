@@ -6,6 +6,10 @@ Regression testing is answering one question: *"Did we break anything that used 
 
 That's it. It's not about finding new bugs in new features. It's about making sure the old stuff still works after you changed something. In practice, regression is where most QA time gets swallowed, so getting this right matters.
 
+### The Unspoken Part
+
+Regression also means catching the thing the developer didn't realize they touched. The backend refactor that breaks the mobile API response. The CSS change that shifts the layout on a page nobody checked. The dependency update that changes rounding behavior in the payment service. Most regressions aren't in the code you changed — they're in the code that depended on the code you changed. Keep this in mind when deciding what to test.
+
 ## How Regression Suites Evolve in Real Teams
 
 No one designs a regression suite from scratch. It grows organically, and usually badly, until someone takes the time to prune it.
@@ -39,6 +43,8 @@ Full Regression (1-4 hours)
 ```
 
 **Reality:** Most teams don't have a clean 3-tier suite. They have what I call the "spaghetti suite" — 200 tests that take 45 minutes, half of which are flaky, and no one knows what they actually cover. If that's you, start by categorizing what exists before adding new tests.
+
+Another thing nobody tells you: sometimes regression tests fail because the test is wrong, not the code. A test that asserts "response has 3 items" fails because a dev added a 4th item as part of a new feature. The test needs updating, the code is fine. Learn to tell the difference, and don't block a deploy on a broken test that's testing the wrong thing.
 
 ## What Gets Automated vs. Manually Tested
 
@@ -90,6 +96,14 @@ If you somehow get a free sprint, don't just run regression. Spend it on:
 - Splitting slow test suites to run in parallel
 - Adding tests for areas that have no coverage
 - Reviewing test data for reliability
+
+### Regression After Production Incidents
+
+When something breaks in prod and gets fixed, the fix needs regression too. But the instinct is to just test the fix and move on because everyone is tired and wants to close the incident.
+
+**Don't just test the fix.** The root cause of a production incident often indicates a broader gap. If the bug was "missing validation on user input," there are probably other inputs missing the same validation. If it was a race condition, there are probably other endpoints with the same pattern. Test 2-3 related scenarios, not just the exact one that broke.
+
+Add a regression test for the incident before closing the ticket. If you don't write it now, you won't remember to write it later. And this one actually has proven value — it already caught a bug once.
 
 ## Common Mistakes in Regression Planning
 

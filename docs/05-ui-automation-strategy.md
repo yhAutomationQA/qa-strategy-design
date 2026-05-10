@@ -78,6 +78,24 @@ Two async operations triggered, test checks the result of the second before the 
 2. **Fix the root cause.** Don't add retries. Retries mask the problem and double your CI time.
 3. **Delete if unfixable.** A flaky test that's been retried 10 times and still fails sometimes is worse than no test. Delete it and write a lower-level replacement.
 
+### The "Works on My Machine" Problem
+
+UI tests that pass locally and fail in CI are the #2 cause of frustration (after flaky tests). Usually it's one of:
+- Different screen resolution in CI (element off-screen)
+- Different browser version (CSS rendering differs)
+- Different network speed (your local dev server responds in 10ms, CI hits a real backend in 300ms)
+- Missing fonts or system dependencies (CI doesn't have the same fonts installed)
+
+**Fix:** Run your CI environment locally. Use Docker. Match the CI image to your local dev environment as closely as possible. And always add a 10-minute buffer to your CI timeout for "things that work locally but not in CI" — you'll need it.
+
+### When Devs Don't Add data-testid
+
+You ask for `data-testid` attributes in code review. They get missed. The component is in production and you need tests now. What do you do?
+
+**Practical fallback:** Use a combination of role + text content. `getByRole("button", { name: "Submit" })` is stable enough and maps to accessibility. If that doesn't work, use a unique CSS selector scoped to a container with a stable ID. Don't chain more than 3 levels deep.
+
+But keep pushing for `data-testid`. Every test you write without one is a test that will break in 2 sprints.
+
 ## Selector Strategy
 
 Bad selectors are the #1 maintenance headache in UI automation. Here's what actually works.
@@ -153,3 +171,14 @@ UI tests sit at the top of the test pyramid, and they should be the smallest lay
 ### The One Exception
 
 If your app is a simple CRUD interface with minimal logic, and the real complexity is in the API layer, you may not need UI tests at all. API tests + manual smoke testing might be enough. Don't add UI automation just because it feels like "real QA work."
+
+## A Note on Cross-Browser Testing
+
+You can't test every browser. There are too many. The practical approach:
+
+- **Test Chrome and Firefox** — that covers 85%+ of users on desktop.
+- **Test Safari** — because Apple makes their browser different on purpose, and it's the default on iOS.
+- **Skip Edge, Opera, Brave** unless you have specific data showing they're used by your customers.
+- **Mobile: test iOS Safari and Android Chrome** — that's 95% of mobile traffic.
+
+Run the full UI suite on Chrome. Run a smoke subset on other browsers. If you find a critical browser-specific bug, add targeted tests for that browser only, not the full suite.

@@ -43,6 +43,20 @@ A QA person who spends most of their time writing manual test cases in Jira is b
 
 Opinion: The teams that ship fast consistently are the ones that invested in quality early. The teams that cut quality to ship fast end up slower in 3 months. But this is a hard sell to a PM who needs a feature out by Friday. Pick your battles.
 
+### When Requirements Are Half-Baked
+
+This happens all the time. The AC says "user can filter results" but doesn't say what happens when the filter returns nothing. Or the edge cases aren't documented. Or the requirements changed mid-sprint but the ticket wasn't updated.
+
+In these situations (which is most sprints), QA ends up doing unpaid requirements analysis. You have to figure out what the expected behavior *should* be, then decide if the implementation matches. If you're not sure, ask the PM. If the PM is also not sure, document your assumption in the test and move on. Don't block testing waiting for perfect requirements — they're never coming.
+
+### Production Pressure
+
+When something breaks in production, everything else stops. The sprint plan goes out the window. You're doing hotfix testing with no notice.
+
+In those moments, the process is simple: test the fix, test the path the fix touches, smoke test everything else. Don't run the full regression. Don't write new test cases. Ship it, monitor it, add the regression test after. The customer doesn't care about your testing process — they care that the thing is working again.
+
+Write down what you skipped so you can circle back. But be realistic: you probably won't. That's OK.
+
 ## Guiding Principles
 
 - **Risk drives effort.** We don't test everything equally. We test based on likelihood and impact of failure.
@@ -75,12 +89,20 @@ We don't have time to test everything. Here's the prioritization:
 
 This is not a fixed formula. It changes per sprint, per release, per mood of the product manager. Accept it.
 
+In practice, you'll also have to make calls based on vibes. "This change touches the same code that broke last month — test it heavily." "This feature was rushed and the dev didn't write unit tests — compensate with more integration tests." The risk framework is a guide, not a script. Use your judgment.
+
 ## Automation Principles
 
 - **Prefer API tests over UI tests.** UI tests are brittle and slow. Use them sparingly.
 - **Test data should be explicit.** Tests that depend on "whatever is in the DB" are flaky. Seed what you need.
 - **Don't chase 100% coverage.** It's a vanity metric. Focus on coverage of risky paths.
 - **Flaky tests must be fixed or removed.** A flaky suite destroys trust. If a test can't be stabilized, delete it.
+
+### A Note on "Good Enough"
+
+Not every test needs to be perfect. Sometimes you write a quick smoke test that only covers the happy path because that's all you have time for. Sometimes you skip the edge case validation because the API is going to be rewritten next month. Sometimes you rely on manual testing because automation would take twice as long as the feature itself.
+
+This is not laziness. It's allocation. The question isn't "is this perfect?" — it's "is this good enough for the risk level?"
 
 ## What's NOT Covered Here
 

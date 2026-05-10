@@ -99,6 +99,23 @@ Severity is assigned by QA (technical assessment). Priority is assigned by the P
 
 Everyone marks their bugs as Critical/P0. If everything is critical, nothing is critical. Be honest. If you mark a typo as Critical, you're teaching the team to ignore your severity labels.
 
+### The Politics of Severity
+
+Here's the thing nobody says out loud: sometimes a bug is technically Minor but you mark it Major because that's the only way it gets fixed this sprint. And sometimes a bug is technically Critical but everyone knows it's never getting fixed because the feature is being deprecated.
+
+This is political, not technical. Be aware of it. If you inflate severity to get attention, you lose credibility over time. If you're honest and the team still doesn't fix things, that's a process problem, not a bug report problem.
+
+### What Happens When You Find a Bug Mid-Sprint
+
+You're testing a feature on day 3 of a 2-week sprint. You find a Major bug. Dev stops working on their current task to fix it. Now that task is at risk. This is the sprint reality.
+
+The right call depends on context:
+- **If the bug blocks the feature** — it gets fixed now. The other task slips.
+- **If the bug is in an unrelated area** — log it, prioritize in the next sprint planning. Don't derail the current sprint.
+- **If the bug is in the feature being tested but has a workaround** — document the workaround, log the bug, let the PM decide if it blocks the release.
+
+You won't always agree with the decision. That's fine. Your job is to provide clear information about the bug and its impact. The PM's job is to decide what to do about it.
+
 ## Examples: Good vs. Bad
 
 ### Bad Bug Report
@@ -186,6 +203,30 @@ Attachments:
 - Test image used: [link]
 ```
 
+### The "Good Enough" Bug Report
+
+Sometimes you find a bug during exploratory testing and you're in the middle of a flow. You don't want to stop and write a perfect report because you'll lose context. What do you do?
+
+Write a "good enough" report:
+- Title captures the issue
+- Steps are brief but reproduceable
+- Screenshot attached
+- Mark it as "needs cleanup" or add a TODO tag
+
+Come back to it after your session and fill in the details. If you don't come back to it, at least the developer has something to work with. A so-so bug report today is better than a perfect bug report never.
+
+### When Bugs Don't Get Fixed
+
+Not all bugs get fixed. Some get triaged out. Some sit in the backlog for 18 months. Some are "won't fix" because the effort outweighs the impact.
+
+This is frustrating, especially for junior QA. You found a real bug. You wrote a great report. And the team is going to ship without fixing it.
+
+Here's the reality check:
+
+- **Won't fix doesn't mean it's not a bug.** It means the team decided other things are more important right now. That's their call to make.
+- **Document it and move on.** If it's truly important, it will come up again. If it doesn't come up, it wasn't as important as you thought.
+- **Learn the difference between "this matters" and "this matters right now."** A cosmetic bug on an internal admin page might never be worth fixing. That doesn't make you wrong for reporting it. It makes you wrong if you keep pushing it.
+
 ## Tips for Better Bug Reports
 
 - **Reproduce it twice.** If you can't reproduce it consistently, say so. "Happened once on prod, couldn't reproduce on staging" is honest and saves the developer from wasting time trying to repro.
@@ -193,3 +234,4 @@ Attachments:
 - **Note workarounds.** "Refreshing the page resolves it temporarily." or "Clearing the cache fixes it." This helps the developer understand the root cause and helps support answer customers.
 - **Link related issues.** "This might be related to bug #142 — same error message." Even if you're wrong, it gives context.
 - **Call out regressions.** "This worked in v3.1.0, broken in v3.2.0." Regression information is gold. It narrows the search space immediately.
+- **Tag bugs by source.** "Found during exploratory testing" vs "found in production" vs "found while writing automated tests." This helps the team see where their testing gaps are. If most bugs come from production monitoring, your test coverage is weak. If most come from exploratory testing, your automation is missing edge cases. Patterns matter.

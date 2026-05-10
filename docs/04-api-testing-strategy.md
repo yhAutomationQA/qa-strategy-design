@@ -122,6 +122,33 @@ This is the most underrated API testing practice. Most teams test that the respo
 
 **Gotcha:** Don't validate the schema against the spec on every single test. Validate it once per endpoint in a dedicated test. Your happy path tests check the response body logic; your schema test checks the contract.
 
+## The Reality of API Test Environments
+
+The docs above assume you have a clean test environment with controlled data. In real life:
+
+- **Staging is unreliable.** Someone is running a migration, or the test data got wiped, or the environment is down. Your API tests fail because of environment, not because of bugs.
+- **You can't cleanly separate test data.** Other teams are also testing on the same staging environment. Their test runs delete your test records.
+- **The API behaves differently in staging vs production.** Different config, different data volume, different caching behavior. Tests that pass in staging might fail in prod, and vice versa.
+
+### How to Deal with It
+
+- Make your tests create their own data. Don't assume pre-seeded data exists.
+- Run API tests in CI against isolated environments (ephemeral environments, test containers).
+- If you can't isolate, at least tag your test data so you can identify it when it gets corrupted.
+- Accept that some API test failures are environment issues, not code issues. Build your triage process around this reality — first check if the environment is healthy, then investigate the code.
+
+### Debugging in Production
+
+Sometimes you have to. The staging environment doesn't have the same data volume. The bug only repros with real users and real data. You add logging, run a test against prod (read-only, on a test account), and catch the issue.
+
+This is not ideal. It's also reality. If you're doing this, be careful:
+- Never modify production data
+- Never test against real user accounts
+- Use feature flags to isolate test traffic
+- Clean up any test data you create
+
+The goal is to not need this. But sometimes you do. That's honest.
+
 ## Performance Considerations
 
 API tests serve double duty. They verify correctness *and* give you a baseline for performance.

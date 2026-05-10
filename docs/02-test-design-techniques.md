@@ -36,6 +36,8 @@ Amount field with min $1.00, max $10,000.00:
 
 **Gotcha:** Check decimal handling. Some systems truncate, some round, some reject. $10,000.001 is a classic miss.
 
+**Pro shortcut:** In a rush, just test min-1, min, max, max+1. Skip everything in between. If you're really pressed, test min and max only. That catches 90% of boundary bugs. Not perfect, but good enough for a Friday afternoon deploy.
+
 ### API — Pagination
 
 `GET /api/orders?page=1&limit=50`
@@ -154,3 +156,14 @@ Is it cheaper to fix bugs than to test? → Don't test at all (yes, seriously)
 ```
 
 That last one is controversial but honest. Some edge cases are cheaper to fix in production than to build and maintain automation for. Use sparingly.
+
+## When You Don't Have Time for This
+
+Let's be real. In a sprint, you often don't have time to methodically run BVA on every field. Here's the shortcut:
+
+- **Test boundaries on anything that handles money, auth, or data.** Payment amounts, password lengths, pagination limits. Those matter.
+- **Skip BVA on display-only fields.** If it's just showing text on a page, boundaries are unlikely to find a bug.
+- **Equivalence partition by instinct.** After a while, you just know that "empty list" and "list with one item" are the two cases that matter. Trust the gut.
+- **Do exploratory testing even if you skip everything else.** 15 minutes of clicking around the changed feature finds more bugs than running through a checklist.
+
+The techniques in this doc are the ideal. In practice, you'll use them about 60% of the time. The other 40% is instinct, experience, and making educated guesses about where bugs hide. That's normal.
