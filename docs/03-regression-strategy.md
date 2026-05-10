@@ -8,7 +8,7 @@ That's it. It's not about finding new bugs in new features. It's about making su
 
 ### The Unspoken Part
 
-Regression also means catching the thing the developer didn't realize they touched. The backend refactor that breaks the mobile API response. The CSS change that shifts the layout on a page nobody checked. The dependency update that changes rounding behavior in the payment service. Most regressions aren't in the code you changed — they're in the code that depended on the code you changed. Keep this in mind when deciding what to test.
+Most regressions aren't in the code you changed. They're in the code that depended on it. The backend refactor that breaks the mobile API. The CSS tweak that shifts the checkout layout. The dependency update that changes payment rounding. Keep this in mind when deciding what to test — the impact is often wider than it looks.
 
 ## How Regression Suites Evolve in Real Teams
 
@@ -42,9 +42,9 @@ Full Regression (1-4 hours)
   └── Failures are triaged, not necessarily blocking
 ```
 
-**Reality:** Most teams don't have a clean 3-tier suite. They have what I call the "spaghetti suite" — 200 tests that take 45 minutes, half of which are flaky, and no one knows what they actually cover. If that's you, start by categorizing what exists before adding new tests.
+**Reality:** Most teams don't have a clean 3-tier suite. They have a "spaghetti suite" — 200 tests that take 45 minutes, half of them flaky, and nobody knows what they cover. If that's you, start by categorizing what exists before adding more.
 
-Another thing nobody tells you: sometimes regression tests fail because the test is wrong, not the code. A test that asserts "response has 3 items" fails because a dev added a 4th item as part of a new feature. The test needs updating, the code is fine. Learn to tell the difference, and don't block a deploy on a broken test that's testing the wrong thing.
+**Also:** sometimes regression tests fail because the test is wrong, not the code. A test asserting "response has 3 items" fails because a dev added a 4th as part of a new feature. The test needs updating, the code is fine. Learn to tell the difference. Don't block a deploy on a broken test.
 
 ## What Gets Automated vs. Manually Tested
 

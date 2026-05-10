@@ -166,4 +166,4 @@ Let's be real. In a sprint, you often don't have time to methodically run BVA on
 - **Equivalence partition by instinct.** After a while, you just know that "empty list" and "list with one item" are the two cases that matter. Trust the gut.
 - **Do exploratory testing even if you skip everything else.** 15 minutes of clicking around the changed feature finds more bugs than running through a checklist.
 
-The techniques in this doc are the ideal. In practice, you'll use them about 60% of the time. The other 40% is instinct, experience, and making educated guesses about where bugs hide. That's normal.
+These techniques are the ideal. Use them when you can. The rest of the time, go with instinct and experience. That's normal.

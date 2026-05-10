@@ -132,10 +132,10 @@ The docs above assume you have a clean test environment with controlled data. In
 
 ### How to Deal with It
 
-- Make your tests create their own data. Don't assume pre-seeded data exists.
-- Run API tests in CI against isolated environments (ephemeral environments, test containers).
-- If you can't isolate, at least tag your test data so you can identify it when it gets corrupted.
-- Accept that some API test failures are environment issues, not code issues. Build your triage process around this reality — first check if the environment is healthy, then investigate the code.
+- Tests should create their own data. Don't rely on pre-seeded records.
+- Run API tests against isolated environments (ephemeral, test containers) when possible.
+- If you can't isolate, tag your test data so you can identify it when it gets corrupted.
+- Accept that some failures are environment issues, not code bugs. When triaging, check the environment first, then the code.
 
 ### Debugging in Production
 

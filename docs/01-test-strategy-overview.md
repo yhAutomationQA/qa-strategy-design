@@ -45,9 +45,9 @@ Opinion: The teams that ship fast consistently are the ones that invested in qua
 
 ### When Requirements Are Half-Baked
 
-This happens all the time. The AC says "user can filter results" but doesn't say what happens when the filter returns nothing. Or the edge cases aren't documented. Or the requirements changed mid-sprint but the ticket wasn't updated.
+This happens all the time. The AC says "user can filter results" but doesn't say what happens when the filter returns nothing. Edge cases aren't documented. Requirements change mid-sprint but the ticket doesn't get updated.
 
-In these situations (which is most sprints), QA ends up doing unpaid requirements analysis. You have to figure out what the expected behavior *should* be, then decide if the implementation matches. If you're not sure, ask the PM. If the PM is also not sure, document your assumption in the test and move on. Don't block testing waiting for perfect requirements — they're never coming.
+When this happens (most sprints), QA ends up filling the gaps. You figure out what should happen, then check if the implementation matches. If you're not sure, ask the PM. If they're also not sure, document your assumption and move on. Don't wait for perfect requirements — they're never coming.
 
 ### Production Pressure
 
@@ -98,11 +98,11 @@ In practice, you'll also have to make calls based on vibes. "This change touches
 - **Don't chase 100% coverage.** It's a vanity metric. Focus on coverage of risky paths.
 - **Flaky tests must be fixed or removed.** A flaky suite destroys trust. If a test can't be stabilized, delete it.
 
-### A Note on "Good Enough"
+### Good Enough Is Fine
 
-Not every test needs to be perfect. Sometimes you write a quick smoke test that only covers the happy path because that's all you have time for. Sometimes you skip the edge case validation because the API is going to be rewritten next month. Sometimes you rely on manual testing because automation would take twice as long as the feature itself.
+Not every test needs to be perfect. Sometimes you only have time for a happy-path smoke test. Sometimes you skip edge cases because the API is getting rewritten next month. Sometimes manual testing is the right call because automation would take longer than the feature itself.
 
-This is not laziness. It's allocation. The question isn't "is this perfect?" — it's "is this good enough for the risk level?"
+This isn't laziness. It's allocation. The question isn't "is this perfect?" — it's "is this good enough for this risk level?"
 
 ## What's NOT Covered Here
 

@@ -86,7 +86,7 @@ UI tests that pass locally and fail in CI are the #2 cause of frustration (after
 - Different network speed (your local dev server responds in 10ms, CI hits a real backend in 300ms)
 - Missing fonts or system dependencies (CI doesn't have the same fonts installed)
 
-**Fix:** Run your CI environment locally. Use Docker. Match the CI image to your local dev environment as closely as possible. And always add a 10-minute buffer to your CI timeout for "things that work locally but not in CI" — you'll need it.
+**Fix:** Run your CI environment locally. Use Docker. Match the CI image to your local dev setup. And budget extra CI timeout for "works locally but not in CI" — you'll need it.
 
 ### When Devs Don't Add data-testid
 

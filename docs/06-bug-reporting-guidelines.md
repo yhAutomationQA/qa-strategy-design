@@ -101,9 +101,9 @@ Everyone marks their bugs as Critical/P0. If everything is critical, nothing is 
 
 ### The Politics of Severity
 
-Here's the thing nobody says out loud: sometimes a bug is technically Minor but you mark it Major because that's the only way it gets fixed this sprint. And sometimes a bug is technically Critical but everyone knows it's never getting fixed because the feature is being deprecated.
+Sometimes a bug is technically Minor but you mark it Major because that's the only way it gets fixed. Sometimes a bug is Critical but everyone knows it's never getting fixed because the feature is being deprecated.
 
-This is political, not technical. Be aware of it. If you inflate severity to get attention, you lose credibility over time. If you're honest and the team still doesn't fix things, that's a process problem, not a bug report problem.
+This is political, not technical. If you inflate severity to get attention, you lose credibility. If you're honest and things still don't get fixed, that's a process problem, not a reporting problem.
 
 ### What Happens When You Find a Bug Mid-Sprint
 
@@ -225,7 +225,7 @@ Here's the reality check:
 
 - **Won't fix doesn't mean it's not a bug.** It means the team decided other things are more important right now. That's their call to make.
 - **Document it and move on.** If it's truly important, it will come up again. If it doesn't come up, it wasn't as important as you thought.
-- **Learn the difference between "this matters" and "this matters right now."** A cosmetic bug on an internal admin page might never be worth fixing. That doesn't make you wrong for reporting it. It makes you wrong if you keep pushing it.
+- **Learn the difference between "this matters" and "this matters right now."** A cosmetic bug on an internal admin page might never be worth fixing. Reporting it is fine. Pushing it every sprint is not.
 
 ## Tips for Better Bug Reports
 
