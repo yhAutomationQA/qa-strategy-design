@@ -12,11 +12,16 @@ QA engineers, SDETs, developers who test, and engineering leads who want to unde
 
 Traditional QA was a phase at the end. QA was the "no" department. That model is dead in CI/CD teams. Quality engineering means embedding testing into the entire lifecycle — from design to deploy — and everyone owns it. This playbook reflects that shift.
 
-## Structure
+## What's Here
 
 ```
-docs/         — Strategy docs, decision logs, guides
-templates/    — Reusable templates
+docs/
+├── 01-test-strategy-overview.md    — Core testing philosophy, risk framework, trade-offs
+├── 02-test-design-techniques.md    — BVA, equivalence partitioning, exploratory testing
+├── 03-regression-strategy.md       — Suite structure, time pressure, common mistakes
+├── 04-api-testing-strategy.md      — Coverage, auth, schema validation, environments
+├── 05-ui-automation-strategy.md    — Selectors, flaky tests, the pyramid, cross-browser
+└── 06-bug-reporting-guidelines.md  — Severity vs priority, good reports, triage reality
 ```
 
 ## How This Repo Works
@@ -27,4 +32,4 @@ If something seems inconsistent, ask about it. That's usually where the interest
 
 ## Status
 
-Early stage. We're building this as we figure out what actually sticks. Some docs are drafts, some have been battle-tested. Read with that context.
+Active. Six docs covering the full QA lifecycle — from strategy to day-to-day tactics. Still evolving as the team and product change. If something's missing, open an issue or add it.
